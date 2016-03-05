@@ -1,7 +1,0 @@
-/Users/kimsereylam/Projects/watcher/watcher.api/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.fs
-/Users/kimsereylam/Projects/watcher/watcher.api/bin/Debug/watcher.api.exe.mdb
-/Users/kimsereylam/Projects/watcher/watcher.api/bin/Debug/watcher.api.exe
-/Users/kimsereylam/Projects/watcher/watcher.api/obj/x86/Debug/watcher.api.exe
-/Users/kimsereylam/Projects/watcher/watcher.api/obj/x86/Debug/watcher.api.exe.mdb
-/Users/kimsereylam/Projects/watcher/watcher.api/bin/Debug/FSharp.Core.dll
-/Users/kimsereylam/Projects/watcher/watcher.api/bin/Debug/Suave.dll

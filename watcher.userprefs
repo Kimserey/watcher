@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="watcher.api/watcher.api.fsproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="watcher.api/Program.fs">
+    <Files>
+      <File FileName="watcher.api/Program.fs" Line="19" Column="24" />
+      <File FileName="watcher.api/index.html" Line="7" Column="29" />
+      <File FileName="watcher.api/eventsource.js" Line="4" Column="4" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

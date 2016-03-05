@@ -1,2 +1,5 @@
 .DS_Store
+watcher.api/bin/*
+watcher.api/debug/*
+watcher.api/obj/*
 packages/*

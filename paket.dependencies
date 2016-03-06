@@ -1,0 +1,5 @@
+source https://www.nuget.org/api/v2
+framework >= net40
+
+nuget FAKE
+nuget Suave 1.1.1

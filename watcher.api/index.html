@@ -2,22 +2,16 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>EventSource example</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="eventsource.js"></script>
-    <script>
-      var es = new EventSource("events");
-      var listener = function (event) {
-        var div = document.createElement("div");
-        var type = event.type;
-        div.appendChild(document.createTextNode(type + ": " + (type === "message" ? event.data : es.url)));
-        document.body.appendChild(div);
-      };
-      es.addEventListener("open", listener);
-      es.addEventListener("message", listener);
-      es.addEventListener("error", listener);
-    </script>
+    <title>App</title>
+    <script> var es = new EventSource("/events"); es.onmessage = function(e) { console.log("Refresh received."); location.reload(); } </script>
 </head>
 <body>
+	Almost live preview?
+	<br />
+	Any idea?
+	<br />
+	On what to do maybe?
+	<br />
+	Bye bye
 </body>
 </html>

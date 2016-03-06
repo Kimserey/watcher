@@ -12,44 +12,44 @@ open Suave.Web
 open System
 open System.IO
 
-
-let (<!>) a b =
-    match a with
-    | Choice1Of2 x -> Choice1Of2 x
-    | Choice2Of2 _ -> b
-
-let (<.>) a b =
-    match a with
-    | Choice1Of2 x -> x
-    | Choice2Of2 _ -> b
-
-/// Maybe convert to int32 from string
-let muint32 str =
-    match System.UInt32.TryParse str with
-    | true, i -> Choice1Of2 i
-    | _       -> Choice2Of2 "couldn't convert to int32"
-
-
 let indexPath =
     __SOURCE_DIRECTORY__ + "/index.html"
 
-let webPart =
+
+type Refresh =
+| Order
+| Query of AsyncReplyChannel<bool>
+
+let agent = MailboxProcessor.Start (fun inbox ->
+        let rec loop state =
+            async {
+                let! msg = inbox.Receive()
+                match msg with
+                | Order -> 
+                    return! loop true
+                | Query channel ->
+                    do channel.Reply state
+                    return! loop false
+            }
+        loop false)
+
+let app =
     choose 
-        [ GET >=> choose [ path "/" >=> file indexPath
-                           browseHome
-                           path "/events2" >=> request (fun _ -> EventSource.handShake (fun out ->
-                            socket {
-                                let msg = { id = "1"; data = "First Message"; ``type`` = None }
-                                do! msg |> send out
-                                let msg = { id = "2"; data = "Second Message"; ``type`` = None }
-                                do! msg |> send out
-                              })) 
-                           path "/events" >=> request (fun r -> EventSource.handShake (fun out ->
-                            socket {
-                                printf "hello"
-                            })) ] ]
+        [ GET >=> choose [ path "/"       >=> file (__SOURCE_DIRECTORY__ + "/index.html")
+                           path "/events" >=> request (fun _ -> 
+                            EventSource.handShake (fun out ->
+                                socket {
+                                    while true do
+                                        do! SocketOp.ofAsync(Async.Sleep(2000))
+                                        let! refresh = SocketOp.ofAsync(agent.PostAndAsyncReply Query)
+
+                                        if refresh then
+                                            do! send out (mkMessage (Guid.NewGuid().ToString()) "refresh")
+                                })) ]
+          POST >=> path "/refresh"  >=> request (fun _ -> printfn "Refresh requested"; agent.Post Order; OK "Refresh ordered.") ]             
+
 
 [<EntryPoint>]
 let main argv = 
-    startWebServer { defaultConfig with homeFolder = Some __SOURCE_DIRECTORY__ } webPart
+    startWebServer { defaultConfig with homeFolder = Some __SOURCE_DIRECTORY__ } app
     0

@@ -3,15 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <title>App</title>
-    <script> var es = new EventSource("/events"); es.onmessage = function(e) { console.log("Refresh received."); location.reload(); } </script>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="app.js"></script>
+    <script> 
+	    function reload(src) {
+	        $('script[src="' + src + '"]').remove();
+	        $('<script>').attr('src', src).appendTo('head');
+	    }
+    	
+    	var es = new EventSource("/events"); 
+    	es.onmessage = function(e) {
+    		$("#main").empty();
+    		reload('app.js');
+		}
+	</script>
 </head>
 <body>
-	Almost live preview?
-	<br />
-	Any idea?
-	<br />
-	On what to do maybe?
-	<br />
-	Bye bye
+	<div id="main"></div>
 </body>
 </html>

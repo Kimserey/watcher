@@ -35,12 +35,13 @@ let agent = MailboxProcessor.Start (fun inbox ->
 
 let app =
     choose 
-        [ GET >=> choose [ path "/"       >=> file (__SOURCE_DIRECTORY__ + "/index.html")
+        [ GET >=> choose [ browseHome
+                           path "/"       >=> file (__SOURCE_DIRECTORY__ + "/index.html")
                            path "/events" >=> request (fun _ -> 
                             EventSource.handShake (fun out ->
                                 socket {
                                     while true do
-                                        do! SocketOp.ofAsync(Async.Sleep(2000))
+                                        do! SocketOp.ofAsync(Async.Sleep(500))
                                         let! refresh = SocketOp.ofAsync(agent.PostAndAsyncReply Query)
 
                                         if refresh then

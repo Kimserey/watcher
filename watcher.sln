@@ -19,4 +19,6 @@ Global
 		{02E791C5-4079-4974-9A53-3456319BA4C8}.Release|x86.ActiveCfg = Release|x86
 		{02E791C5-4079-4974-9A53-3456319BA4C8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
 EndGlobal

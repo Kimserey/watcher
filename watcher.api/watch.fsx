@@ -15,12 +15,8 @@ Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
 Target "Watch" (fun _ ->
     use watcher = 
-        !! "**/*.html" 
-        |> WatchChanges (fun _ -> 
-            printfn "Changed"
-
-            ExecutePost "http://127.0.0.1:8083/refresh" "a" "a" "a"
-            |> printfn "Post - %A")
+        !! "**/*.js" 
+        |> WatchChanges (fun _ -> ExecutePost "http://127.0.0.1:8083/refresh" "." "." "" |> ignore)
 
           
     //Prevents watcher from stopping

@@ -7,6 +7,6 @@ Run the following commands in `/site`:
 `fsharpi server.fsx`
 
 - to start the FAKE watcher:
-`fsharpi watch.fsx`
+`fsharpi watcher.fsx`
 
 ![preview] (https://raw.githubusercontent.com/Kimserey/watcher/master/autoreload.gif)

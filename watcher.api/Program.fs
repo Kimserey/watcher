@@ -18,20 +18,21 @@ let indexPath =
 
 type Refresh =
 | Order
-| Query of AsyncReplyChannel<bool>
+| Query of AsyncReplyChannel<bool * int>
 
 let agent = MailboxProcessor.Start (fun inbox ->
         let rec loop state =
             async {
                 let! msg = inbox.Receive()
-                match msg with
-                | Order -> 
-                    return! loop true
-                | Query channel ->
-                    do channel.Reply state
-                    return! loop false
+                let updatedState =
+                    match state, msg with
+                    | (_, id),       Order -> true, id
+                    | (refresh, id), Query channel when not refresh -> channel.Reply state; state
+                    | (refresh, id), Query channel when refresh     -> channel.Reply state; false, id + 1
+                    | _ -> state
+                return! loop updatedState
             }
-        loop false)
+        loop (false, 0))
 
 let app =
     choose 
@@ -42,12 +43,12 @@ let app =
                                 socket {
                                     while true do
                                         do! SocketOp.ofAsync(Async.Sleep(500))
-                                        let! refresh = SocketOp.ofAsync(agent.PostAndAsyncReply Query)
+                                        let! (refresh, id) = SocketOp.ofAsync(agent.PostAndAsyncReply Query)
 
                                         if refresh then
-                                            do! send out (mkMessage (Guid.NewGuid().ToString()) "refresh")
+                                            do! send out (mkMessage (string id) "refresh")
                                 })) ]
-          POST >=> path "/refresh"  >=> request (fun _ -> printfn "Refresh requested"; agent.Post Order; OK "Refresh ordered.") ]             
+          POST >=> path "/refresh"  >=> request (fun _ -> agent.Post Order; OK "Refresh ordered.") ]             
 
 
 [<EntryPoint>]

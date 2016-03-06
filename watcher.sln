@@ -6,12 +6,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{715BC2
 		paket.dependencies = paket.dependencies
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "site", "site", "{A0209FA5-6B29-46CF-B969-1D445CCF8A79}"
+	ProjectSection(SolutionItems) = preProject
+		site\index.html = site\index.html
+		site\server.fsx = site\server.fsx
+		site\watcher.fsx = site\watcher.fsx
+		site\watcher.js = site\watcher.js
+	EndProjectSection
+EndProject
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "spa", "spa\spa.fsproj", "{7716435F-C6BD-4ADD-BC11-507764B70DB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7716435F-C6BD-4ADD-BC11-507764B70DB9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7716435F-C6BD-4ADD-BC11-507764B70DB9}.Debug|x86.Build.0 = Debug|Any CPU
+		{7716435F-C6BD-4ADD-BC11-507764B70DB9}.Release|x86.ActiveCfg = Release|Any CPU
+		{7716435F-C6BD-4ADD-BC11-507764B70DB9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

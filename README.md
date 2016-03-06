@@ -7,4 +7,4 @@ Run the following commands to start the Suave server:
 and start the FAKE watcher:
 `fsharpi watch.fsx`
 
-![preview] (https://raw.githubusercontent.com/Kimserey/watcher/master/watcher.api/autoreload.gif)
+![preview] (https://raw.githubusercontent.com/Kimserey/watcher/master/autoreload.gif)

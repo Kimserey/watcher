@@ -1,4 +1,4 @@
-﻿<Properties StartupItem="watcher.api/watcher.api.fsproj">
+﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="watcher.api/index.html">
     <Files>

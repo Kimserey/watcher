@@ -1,7 +1,7 @@
 # Watcher
 Auto reload of js file with FAKE file watcher and Suave EventSource
 
-Run the following commands:
+Run the following commands in `/site`:
 
 - to start the Suave server:
 `fsharpi server.fsx`

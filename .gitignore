@@ -1,4 +1,5 @@
 .DS_Store
+.paket/paket.exe
 watcher.api/bin/*
 watcher.api/debug/*
 watcher.api/obj/*

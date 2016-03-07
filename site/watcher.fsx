@@ -10,11 +10,12 @@ Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
 Target "Watch" (fun _ ->
     use watcher = 
-        !! "**/*.js" 
+        //Not sure why it won't find my path if I don't specify a full path.
+        !! "/Users/kimsereylam/Projects/watcher/spa/*.fs"
         |> WatchChanges (fun _ -> 
             let setParams defaults =
                 { defaults with
-                    Verbosity = Some(Quiet)
+                    Verbosity = Some(MSBuildVerbosity.Quiet)
                     Targets = ["Build"]
                     Properties =
                         [
@@ -26,10 +27,12 @@ Target "Watch" (fun _ ->
             build setParams "../watcher.sln"
 
             //Copies the static files to /site folder.
-            CopyDir "." "../spa/Content" (fun _ -> true)
-            CopyFile "." "../spa/index.html"
+            DeleteDir "Content"
+            CopyDir   "Content" "../spa/Content" (fun _ -> true)
+            CopyFile  "index.html" "../spa/index.html"
 
             //Sends a POST request to refresh the browser.
+            printfn "POST refresh "
             ExecutePost "http://127.0.0.1:8083/refresh" "." "." "" |> ignore)
 
           

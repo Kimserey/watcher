@@ -1,11 +1,13 @@
 ﻿<Properties StartupItem="spa/spa.fsproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="watcher.api/index.html">
+  <MonoDevelop.Ide.Workbench ActiveDocument="spa/Client.fs">
     <Files>
-      <File FileName="watcher.api/Program.fs" Line="22" Column="37" />
-      <File FileName="paket.dependencies" Line="1" Column="1" />
-      <File FileName="watcher.api/index.html" Line="14" Column="2" />
-      <File FileName="watcher.api/paket.references" Line="3" Column="1" />
+      <File FileName="spa/index.html" Line="5" Column="79" />
+      <File FileName="site/watcher.fsx" Line="32" Column="23" />
+      <File FileName="site/server.fsx" Line="54" Column="21" />
+      <File FileName="spa/Client.fs" Line="16" Column="34" />
+      <File FileName="site/watcher.js" Line="17" Column="4" />
+      <File FileName="site/index.html" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

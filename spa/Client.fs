@@ -11,5 +11,9 @@ open WebSharper.UI.Next.Client
 module Client =    
 
     let main =
-        div [ text "Hello world" ]
+        [ div [ h1 [ text "This is a test of auto refresh" ]
+                p  [ text "Hello world!" ]
+                Doc.Button "Click" [] ignore ] ]
+        |> Seq.cast
+        |> Doc.Concat
         |> Doc.RunById "main"

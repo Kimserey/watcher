@@ -17105,25 +17105,33 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
 ;
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,List,UI,Next,Doc,spa,Client;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,Doc,List,T,spa,Client;
  Runtime.Define(Global,{
   spa:{
    Client:{
     main:Runtime.Field(function()
     {
-     var arg20;
-     arg20=List.ofArray([Doc.TextNode("Hello world")]);
-     return Doc.RunById("main",Doc.Element("div",[],arg20));
+     var arg20,arg201,arg202,arg203;
+     arg201=List.ofArray([Doc.TextNode("This is a test of auto refresh")]);
+     arg202=List.ofArray([Doc.TextNode("Hello world!")]);
+     arg203=function()
+     {
+     };
+     arg20=List.ofArray([Doc.Element("h1",[],arg201),Doc.Element("p",[],arg202),Doc.Button("Click",Runtime.New(T,{
+      $:0
+     }),arg203)]);
+     return Doc.RunById("main",Doc.Concat(List.ofArray([Doc.Element("div",[],arg20)])));
     })
    }
   }
  });
  Runtime.OnInit(function()
  {
-  List=Runtime.Safe(Global.WebSharper.List);
   UI=Runtime.Safe(Global.WebSharper.UI);
   Next=Runtime.Safe(UI.Next);
   Doc=Runtime.Safe(Next.Doc);
+  List=Runtime.Safe(Global.WebSharper.List);
+  T=Runtime.Safe(List.T);
   spa=Runtime.Safe(Global.spa);
   return Client=Runtime.Safe(spa.Client);
  });

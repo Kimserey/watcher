@@ -38,8 +38,7 @@ let agent = MailboxProcessor.Start (fun inbox ->
 
 let app =
     choose 
-        [ GET >=> choose [ browseHome
-                           path "/"       >=> file (__SOURCE_DIRECTORY__ + "/index.html")
+        [ GET >=> choose [ path "/"       >=> file (__SOURCE_DIRECTORY__ + "/index.html")
                            path "/events" >=> request (fun _ -> 
                             EventSource.handShake (fun out ->
                                 socket {
@@ -49,8 +48,12 @@ let app =
 
                                         if refresh then
                                             do! send out (mkMessage (string id) "refresh")
-                                })) ]
-          POST >=> path "/refresh"  >=> request (fun _ -> agent.Post Order; OK "Refresh ordered.") ]             
+                                }))
+                           browseHome ]
+          POST >=> path "/refresh"  >=> request (fun _ -> 
+            printfn "Order refresh to browser."
+            agent.Post Order
+            OK "Refresh ordered.") ]             
 
 
 startWebServer { defaultConfig with homeFolder = Some __SOURCE_DIRECTORY__ } app

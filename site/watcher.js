@@ -7,7 +7,7 @@
 
 function reload(src) {
     $('script[src="' + src + '"]').remove();
-    $('<script>').attr('src', src).appendTo('head');
+    $('<script>').attr('src', src).append('body');
 }
 
 var es = new EventSource("/events"); 
@@ -16,5 +16,6 @@ $(function() {
 	es.onmessage = function(e) {
 		$("#main").empty();
 		reload('Content/spa.min.js');
+//		location.reload(true);
 	}
 })
